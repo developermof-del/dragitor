@@ -1,15 +1,657 @@
 <!doctype html>
-<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dragitor — Support</title>
-<style>:root{color-scheme:light dark}body{margin:0;font:17px/1.6 -apple-system,system-ui,Tahoma,sans-serif;background:Canvas;color:CanvasText}main{max-width:720px;margin:0 auto;padding:32px 16px}section[lang=en]{direction:ltr;text-align:left}</style>
-</head><body><main>
-<section lang="ar"><h1>دعم Dragitor</h1>
-<p>لأي سؤال أو مشكلة أو اقتراح، راسلنا على <a href="mailto:developer.mof@gmail.com">developer.mof@gmail.com</a>.</p>
-<p>لاستعادة Dragitor Pro على جهاز جديد: الإعدادات ▸ Dragitor Pro ▸ استعادة المشتريات.</p>
-<p><a href="privacy.html">سياسة الخصوصية</a></p></section>
-<hr>
-<section lang="en" dir="ltr"><h1>Dragitor Support</h1>
-<p>For questions, problems or suggestions, email <a href="mailto:developer.mof@gmail.com">developer.mof@gmail.com</a>.</p>
-<p>To restore Dragitor Pro on a new device: Settings ▸ Dragitor Pro ▸ Restore Purchases.</p>
-<p><a href="privacy.html">Privacy Policy</a></p></section>
-</main></body></html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Dragitor — محرر PDF والملفات</title>
+<meta name="description" content="استوديو ملفاتك المتكامل على iPhone وiPad: عدّل PDF، واكتب مستندات Word، وصغّر الفيديو والصور، وترجم ملفاتك، بخصوصية تامة على جهازك.">
+<meta property="og:title" content="Dragitor: PDF Editor & Files">
+<meta property="og:description" content="Edit PDFs, write documents, compress media, enhance photos with on-device AI and translate files — privately on iPhone and iPad.">
+<meta property="og:image" content="https://developermof-del.github.io/dragitor/img/en/1-home.webp">
+<meta name="theme-color" content="#5b5ef4">
+<link rel="icon" href="img/icon.webp" type="image/webp">
+<link rel="apple-touch-icon" href="img/icon.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light dark;
+  --bg:#f4f4fb;--surface:#ffffff;--surface-2:#ececf6;--fg:#15151f;--muted:#5d5d70;--line:#e2e2ee;
+  --brand:#5b5ef4;--brand-2:#2aa7f5;--pink:#ec4f8b;--green:#1f9d55;--green-bg:#e3f6ea;
+  --grad:linear-gradient(135deg,var(--brand),var(--brand-2));
+  --shadow:0 18px 50px -20px rgba(54,48,160,.35);
+  --radius:22px;
+  --font:"IBM Plex Sans Arabic","Inter",-apple-system,system-ui,"Segoe UI",Tahoma,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0b0b12;--surface:#16161f;--surface-2:#20202c;--fg:#f2f2f8;--muted:#a2a2b6;--line:#2a2a38;--green:#4ade80;--green-bg:#123322;--shadow:0 18px 50px -20px rgba(0,0,0,.7)}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html[lang=en] body{font-family:"Inter","IBM Plex Sans Arabic",-apple-system,system-ui,"Segoe UI",sans-serif}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:16px;font-weight:700;text-decoration:none;border:0;cursor:pointer;font:inherit;font-weight:700;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:0 12px 30px -10px rgba(91,94,244,.6)}
+.btn-ghost{background:var(--surface);color:var(--fg);border:1px solid var(--line)}
+.btn small{display:block;font-weight:500;font-size:12px;opacity:.85;line-height:1.2}
+.btn .stack{display:flex;flex-direction:column;line-height:1.25}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600;background:var(--green-bg);color:var(--green)}
+
+/* Header */
+header.top{position:sticky;top:0;z-index:20;backdrop-filter:saturate(1.6) blur(16px);-webkit-backdrop-filter:saturate(1.6) blur(16px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid transparent;transition:border-color .3s}
+header.top.scrolled{border-bottom-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;text-decoration:none}
+.brand img{width:34px;height:34px;border-radius:9px}
+.nav-links{display:flex;gap:22px;font-size:15px;color:var(--muted)}
+.nav-links a{text-decoration:none}
+.nav-links a:hover{color:var(--fg)}
+.lang{display:flex;background:var(--surface-2);border-radius:12px;padding:3px}
+.lang button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:14px;font-weight:700;padding:6px 12px;border-radius:9px;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--surface);color:var(--fg);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+@media (max-width:820px){.nav-links{display:none}}
+
+/* Hero */
+.hero{position:relative;padding:56px 0 40px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-30% -10% auto -10%;height:620px;background:radial-gradient(closest-side,rgba(91,94,244,.28),transparent),radial-gradient(closest-side at 80% 40%,rgba(42,167,245,.22),transparent);filter:blur(10px);z-index:-1;animation:float 14s ease-in-out infinite alternate}
+@keyframes float{to{transform:translate3d(4%,6%,0) scale(1.08)}}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(34px,5.6vw,60px);line-height:1.12;margin:16px 0;letter-spacing:-.01em}
+.hero h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:560px;margin:0 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.trust{display:flex;flex-wrap:wrap;gap:18px;margin-top:28px;color:var(--muted);font-size:14px}
+.trust span::before{content:"✓";color:var(--green);font-weight:800;margin-inline-end:6px}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}.hero{padding-top:32px}}
+
+/* Phone */
+.phone-area{display:flex;flex-direction:column;align-items:center;gap:18px}
+.phone{position:relative;width:min(300px,78vw);aspect-ratio:1320/2868;border-radius:46px;padding:11px;background:linear-gradient(160deg,#2b2b3a,#0d0d14);box-shadow:var(--shadow),inset 0 0 0 2px #3a3a4c}
+.phone .screen{position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#e9e9f5}
+.phone .screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.03);transition:opacity .55s ease,transform .8s ease}
+.phone .screen img.on{opacity:1;transform:none}
+.phone .island{position:absolute;top:20px;left:50%;transform:translateX(-50%);width:30%;height:26px;border-radius:20px;background:#000;z-index:2}
+.tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:420px}
+.tabs button{border:1px solid var(--line);background:var(--surface);color:var(--muted);font:inherit;font-size:14px;font-weight:600;padding:8px 14px;border-radius:999px;cursor:pointer;transition:all .2s}
+.tabs button[aria-selected=true]{background:var(--grad);color:#fff;border-color:transparent}
+.caption{min-height:52px;text-align:center;color:var(--muted);font-size:15px;max-width:360px}
+
+/* Sections */
+section{padding:72px 0}
+.eyebrow{color:var(--brand);font-weight:700;font-size:14px;letter-spacing:.04em;text-transform:uppercase}
+h2{font-size:clamp(28px,4vw,42px);line-height:1.2;margin:8px 0 14px}
+.sub{color:var(--muted);font-size:18px;max-width:640px;margin:0 0 36px}
+.center{text-align:center}.center .sub{margin-inline:auto}
+
+/* Drop demo */
+.drop{position:relative;border:2px dashed color-mix(in srgb,var(--brand) 45%,var(--line));border-radius:28px;background:var(--surface);padding:42px 24px;text-align:center;cursor:pointer;transition:all .25s}
+.drop:hover,.drop.over{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 7%,var(--surface));transform:scale(1.01)}
+.drop .ico{font-size:44px;line-height:1}
+.drop h3{margin:12px 0 6px;font-size:22px}
+.drop p{margin:0;color:var(--muted)}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.samples{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:18px}
+.samples button{border:1px solid var(--line);background:var(--surface-2);color:var(--fg);font:inherit;font-size:14px;padding:7px 13px;border-radius:12px;cursor:pointer}
+.samples button:hover{border-color:var(--brand)}
+.result{margin-top:22px;display:none}
+.result.show{display:block;animation:rise .45s ease}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}}
+.file-pill{display:inline-flex;align-items:center;gap:10px;background:var(--surface-2);border-radius:14px;padding:10px 14px;font-weight:600;margin-bottom:16px;max-width:100%}
+.file-pill span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tool-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.tool{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;animation:rise .4s ease both}
+.tool .ti{flex:none;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:19px;background:color-mix(in srgb,var(--brand) 12%,transparent)}
+.tool b{display:block;font-size:15px}
+.tool small{color:var(--muted);font-size:13px;line-height:1.45;display:block}
+.tool .pro{font-size:11px;font-weight:800;color:#b7791f;background:#fdf3d8;border-radius:6px;padding:1px 6px;margin-inline-start:6px;vertical-align:middle}
+.local-note{margin-top:14px;font-size:13px;color:var(--muted)}
+
+/* Features */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.filters button{border:1px solid var(--line);background:var(--surface);color:var(--muted);font:inherit;font-weight:600;font-size:14px;padding:8px 16px;border-radius:999px;cursor:pointer}
+.filters button[aria-pressed=true]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;transition:transform .25s,box-shadow .25s,opacity .3s}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.card.hide{display:none}
+.card .ci{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:23px;margin-bottom:14px}
+.card h3{margin:0 0 6px;font-size:18px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.c-pdf .ci{background:#ffe4e6}.c-img .ci{background:#fce7f3}.c-media .ci{background:#e0f2fe}.c-doc .ci{background:#e0e7ff}.c-tr .ci{background:#ccfbf1}.c-flow .ci{background:#fef3c7}
+@media (prefers-color-scheme:dark){.c-pdf .ci{background:#3b1d22}.c-img .ci{background:#3a1d30}.c-media .ci{background:#13304a}.c-doc .ci{background:#24264f}.c-tr .ci{background:#103a35}.c-flow .ci{background:#3a2f10}}
+
+/* Privacy band */
+.band{background:var(--grad);color:#fff;border-radius:32px;padding:48px 32px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;position:relative;overflow:hidden}
+.band::after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,.08);inset-inline-end:-120px;top:-160px}
+.band h2{margin-top:0}
+.band p{opacity:.92;font-size:17px;margin:0}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px;position:relative;z-index:1}
+.fact{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:18px;padding:16px}
+.fact b{display:block;font-size:26px;line-height:1.2}
+.fact span{font-size:14px;opacity:.9}
+@media (max-width:820px){.band{grid-template-columns:1fr;padding:36px 22px}}
+
+/* Pro */
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:860px;margin:0 auto}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:26px;padding:28px}
+.plan.pro{border:2px solid transparent;background:linear-gradient(var(--surface),var(--surface)) padding-box,var(--grad) border-box;box-shadow:var(--shadow)}
+.plan h3{margin:0;font-size:22px}
+.plan .tag{color:var(--muted);margin:4px 0 18px}
+.plan ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.plan li{display:flex;gap:10px}
+.plan li::before{content:"✓";color:var(--green);font-weight:800}
+@media (max-width:720px){.plans{grid-template-columns:1fr}}
+
+/* FAQ */
+.faq{max-width:780px;margin:0 auto;display:grid;gap:10px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:4px 20px}
+summary{cursor:pointer;list-style:none;font-weight:700;padding:14px 0;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:22px;line-height:1;color:var(--brand);transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin:0 0 16px;color:var(--muted)}
+
+/* Final CTA + footer */
+.final{text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:32px;padding:56px 24px}
+.final img{width:84px;height:84px;border-radius:20px;margin:0 auto 18px;box-shadow:var(--shadow)}
+footer{padding:36px 0 48px;color:var(--muted);font-size:14px}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;border-top:1px solid var(--line);padding-top:24px}
+.foot nav{display:flex;flex-wrap:wrap;gap:18px}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="top" id="top">
+  <div class="wrap nav">
+    <a class="brand" href="#"><img src="img/icon.webp" alt="" width="34" height="34">Dragitor</a>
+    <nav class="nav-links">
+      <a href="#try" data-t="nav_try">جرّب</a>
+      <a href="#features" data-t="nav_features">المزايا</a>
+      <a href="#privacy" data-t="nav_privacy">الخصوصية</a>
+      <a href="#pro" data-t="nav_pro">Pro</a>
+      <a href="#faq" data-t="nav_faq">الأسئلة</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="ar" aria-pressed="true">عربي</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="chip" data-t="hero_chip">🔒 كل شيء على جهازك</span>
+      <h1 data-t-html="hero_title">استوديو ملفاتك <span class="g">المتكامل</span> على iPhone وiPad</h1>
+      <p class="lead" data-t="hero_lead">عدّل أي PDF، واكتب مستندات Word، وصغّر الفيديو والصور، وحسّنها بالذكاء الاصطناعي، وترجم ملفاتك: بسرعة وخصوصية ودون رفع أي شيء.</p>
+      <div class="cta">
+        <a class="btn btn-primary appstore" href="https://apps.apple.com/app/id6824493708">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.2 1.8-3.26 1.88-3.31-1.03-1.5-2.62-1.7-3.18-1.73-1.35-.14-2.64.8-3.33.8-.69 0-1.74-.78-2.87-.76-1.47.02-2.83.86-3.59 2.18-1.53 2.66-.39 6.59 1.1 8.75.73 1.05 1.6 2.23 2.73 2.19 1.1-.04 1.51-.71 2.84-.71 1.32 0 1.7.71 2.86.69 1.18-.02 1.93-1.07 2.65-2.13.84-1.22 1.18-2.4 1.2-2.46-.03-.01-2.3-.88-2.3-3.5zM14.2 6.13c.6-.73 1.01-1.75.9-2.76-.87.04-1.92.58-2.54 1.31-.56.64-1.05 1.68-.92 2.67.97.08 1.96-.49 2.56-1.22z"/></svg>
+          <span class="stack"><small data-t="cta_small">قريباً على</small>App Store</span>
+        </a>
+        <a class="btn btn-ghost" href="#try" data-t="cta_try">جرّبه بملف من جهازك ↓</a>
+      </div>
+      <div class="trust">
+        <span data-t="trust_1">بلا حساب</span>
+        <span data-t="trust_2">بلا إعلانات</span>
+        <span data-t="trust_3">بلا علامة مائية</span>
+        <span data-t="trust_4">6 لغات</span>
+      </div>
+    </div>
+
+    <div class="phone-area">
+      <div class="phone" aria-live="polite">
+        <div class="island"></div>
+        <div class="screen" id="screen"></div>
+      </div>
+      <div class="tabs" role="tablist" id="tabs"></div>
+      <div class="caption" id="caption"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Drop demo -->
+<section id="try">
+  <div class="wrap">
+    <div class="center reveal">
+      <div class="eyebrow" data-t="try_eyebrow">جرّب الآن</div>
+      <h2 data-t="try_title">أفلت أي ملف، واعرف ماذا يفعل به Dragitor</h2>
+      <p class="sub" data-t="try_sub">هكذا يعمل التطبيق: أفلت الملف فيقترح لك الأدوات المناسبة لنوعه. الصفحة تقرأ اسم الملف ونوعه فقط، ولا ترفع شيئاً.</p>
+    </div>
+    <div class="drop reveal" id="drop">
+      <input type="file" id="picker" multiple aria-label="Choose files">
+      <div class="ico" aria-hidden="true">📥</div>
+      <h3 data-t="drop_title">اسحب ملفاتك وأفلتها هنا</h3>
+      <p data-t="drop_sub">أو اضغط لاختيار ملف: صورة، فيديو، صوت، PDF، مستند، كود…</p>
+    </div>
+    <div class="samples reveal" id="samples">
+      <span style="align-self:center;color:var(--muted);font-size:14px" data-t="samples_label">أو جرّب مثالاً:</span>
+    </div>
+    <div class="result" id="result" aria-live="polite">
+      <div class="file-pill" id="filePill"></div>
+      <div class="tool-list" id="toolList"></div>
+      <p class="local-note" data-t="local_note">🔒 لم يغادر ملفك هذه الصفحة. وفي التطبيق تعمل هذه الأدوات على جهازك أيضاً.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-t="feat_eyebrow">أكثر من 200 أداة</div>
+      <h2 data-t="feat_title">كل ما تحتاجه لملفاتك، في تطبيق واحد</h2>
+      <p class="sub" data-t="feat_sub">من تحرير PDF إلى ضغط الفيديو وتحسين الصور بالذكاء الاصطناعي، دون التنقل بين عشرة تطبيقات.</p>
+    </div>
+    <div class="filters" id="filters" role="group"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<!-- Privacy -->
+<section id="privacy">
+  <div class="wrap">
+    <div class="band reveal">
+      <div style="position:relative;z-index:1">
+        <div class="eyebrow" style="color:#fff;opacity:.85" data-t="priv_eyebrow">الخصوصية أولاً</div>
+        <h2 data-t="priv_title">ملفاتك تبقى معك</h2>
+        <p data-t="priv_text">الضغط والتحويل وتحرير PDF والترجمة وتحسين الصور بالذكاء الاصطناعي تتم كلها على جهازك. لا خوادم لـ Dragitor تستقبل ملفاتك، ولا تتبّع، ولا تحليلات.</p>
+      </div>
+      <div class="facts">
+        <div class="fact"><b>0</b><span data-t="fact_1">بيانات تُجمع عنك</span></div>
+        <div class="fact"><b>0</b><span data-t="fact_2">ملفات تُرفع لخوادمنا</span></div>
+        <div class="fact"><b>100%</b><span data-t="fact_3">ذكاء اصطناعي على الجهاز</span></div>
+        <div class="fact"><b>✓</b><span data-t="fact_4">الأصل محفوظ دائماً</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pro -->
+<section id="pro">
+  <div class="wrap">
+    <div class="center reveal">
+      <div class="eyebrow" data-t="pro_eyebrow">ابدأ مجاناً</div>
+      <h2 data-t="pro_title">Pro شراء واحد، لا اشتراك</h2>
+      <p class="sub" data-t="pro_sub">الأدوات الأساسية مجانية للجميع، ولكل مستخدم استخدام Pro مجاني كل يوم.</p>
+    </div>
+    <div class="plans reveal">
+      <div class="plan">
+        <h3 data-t="free_name">مجاني</h3>
+        <p class="tag" data-t="free_tag">للاستخدام اليومي</p>
+        <ul>
+          <li data-t="free_1">ضغط الصور والفيديو والصوت وتحويلها</li>
+          <li data-t="free_2">محرر PDF ومحرر المستندات والكود</li>
+          <li data-t="free_3">الترجمة على الجهاز</li>
+          <li data-t="free_4">قائمة المشاركة والاختصارات والودجت</li>
+          <li data-t="free_5">استخدام Pro مجاني كل يوم</li>
+        </ul>
+      </div>
+      <div class="plan pro">
+        <h3>Dragitor Pro 👑</h3>
+        <p class="tag" data-t="pro_tag">مرة واحدة، لك للأبد</p>
+        <ul>
+          <li data-t="pro_1">تحسين الصور بالذكاء الاصطناعي: تكبير ×4 وإزالة الضوضاء والضبابية</li>
+          <li data-t="pro_2">الدفعات الكبيرة من الملفات</li>
+          <li data-t="pro_3">السلاسل المحفوظة لتكرار عملك بلمسة</li>
+          <li data-t="pro_4">كل الأدوات المميزة بالتاج</li>
+          <li data-t="pro_5">بلا اشتراك ولا تجديد</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="center reveal">
+      <div class="eyebrow" data-t="faq_eyebrow">أسئلة شائعة</div>
+      <h2 data-t="faq_title">قبل أن تبدأ</h2>
+    </div>
+    <div class="faq reveal">
+      <details><summary data-t="q1">هل تُرفع ملفاتي إلى أي خادم؟</summary><p data-t="a1">لا. الضغط والتحويل وتحرير PDF والترجمة وتحسين الصور تتم على جهازك. الاستثناء الوحيد: التفريغ الصوتي قد يستخدم خوادم Apple بحسب اللغة والجهاز، وبعد إذنك.</p></details>
+      <details><summary data-t="q2">هل يعمل دون إنترنت؟</summary><p data-t="a2">نعم، معظم الأدوات تعمل دون اتصال، ومنها تحسين الصور بالذكاء الاصطناعي لأن نماذجه مضمّنة في التطبيق. الترجمة قد تنزّل نموذج اللغة من Apple أول مرة فقط.</p></details>
+      <details><summary data-t="q3">هل Pro اشتراك؟</summary><p data-t="a3">لا. Dragitor Pro شراء واحد يبقى لك، ويمكنك استعادته على أجهزتك من الإعدادات ▸ Dragitor Pro ▸ استعادة المشتريات.</p></details>
+      <details><summary data-t="q4">ما الأجهزة واللغات المدعومة؟</summary><p data-t="a4">iPhone وiPad، والتطبيق متوفر بالعربية والإنجليزية والفرنسية والإسبانية والألمانية والتركية.</p></details>
+      <details><summary data-t="q5">هل التوقيع في محرر PDF توقيع رقمي رسمي؟</summary><p data-t="a5">التوقيع المرسوم يُضاف إلى الصفحة كصورة، وليس توقيعاً رقمياً بشهادة.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section>
+  <div class="wrap">
+    <div class="final reveal">
+      <img src="img/icon.webp" alt="Dragitor" width="84" height="84">
+      <h2 data-t="final_title">اسحب، أفلت، وأنجز</h2>
+      <p class="sub" style="margin-inline:auto" data-t="final_sub">كل أدوات ملفاتك في جيبك، بخصوصية تامة.</p>
+      <a class="btn btn-primary appstore" href="https://apps.apple.com/app/id6824493708">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.2 1.8-3.26 1.88-3.31-1.03-1.5-2.62-1.7-3.18-1.73-1.35-.14-2.64.8-3.33.8-.69 0-1.74-.78-2.87-.76-1.47.02-2.83.86-3.59 2.18-1.53 2.66-.39 6.59 1.1 8.75.73 1.05 1.6 2.23 2.73 2.19 1.1-.04 1.51-.71 2.84-.71 1.32 0 1.7.71 2.86.69 1.18-.02 1.93-1.07 2.65-2.13.84-1.22 1.18-2.4 1.2-2.46-.03-.01-2.3-.88-2.3-3.5zM14.2 6.13c.6-.73 1.01-1.75.9-2.76-.87.04-1.92.58-2.54 1.31-.56.64-1.05 1.68-.92 2.67.97.08 1.96-.49 2.56-1.22z"/></svg>
+        <span class="stack"><small data-t="cta_small">قريباً على</small>App Store</span>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 Dragitor</span>
+    <nav>
+      <a href="support.html" data-t="f_support">الدعم</a>
+      <a href="privacy.html" data-t="f_privacy">سياسة الخصوصية</a>
+      <a href="mailto:developer.mof@gmail.com">developer.mof@gmail.com</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+// Set to true once Dragitor is live on the App Store: the button then says "Download on the".
+const APP_LIVE = false;
+
+const T = {
+ar:{
+  doc_title:"Dragitor — محرر PDF والملفات",
+  nav_try:"جرّب",nav_features:"المزايا",nav_privacy:"الخصوصية",nav_pro:"Pro",nav_faq:"الأسئلة",
+  hero_chip:"🔒 كل شيء على جهازك",
+  hero_title:'استوديو ملفاتك <span class="g">المتكامل</span> على iPhone وiPad',
+  hero_lead:"عدّل أي PDF، واكتب مستندات Word، وصغّر الفيديو والصور، وحسّنها بالذكاء الاصطناعي، وترجم ملفاتك: بسرعة وخصوصية ودون رفع أي شيء.",
+  cta_small_soon:"قريباً على",cta_small_live:"حمّله من",cta_try:"جرّبه بملف من جهازك ↓",
+  trust_1:"بلا حساب",trust_2:"بلا إعلانات",trust_3:"بلا علامة مائية",trust_4:"6 لغات",
+  try_eyebrow:"جرّب الآن",try_title:"أفلت أي ملف، واعرف ماذا يفعل به Dragitor",
+  try_sub:"هكذا يعمل التطبيق: أفلت الملف فيقترح لك الأدوات المناسبة لنوعه. الصفحة تقرأ اسم الملف ونوعه فقط، ولا ترفع شيئاً.",
+  drop_title:"اسحب ملفاتك وأفلتها هنا",drop_sub:"أو اضغط لاختيار ملف: صورة، فيديو، صوت، PDF، مستند، كود…",
+  samples_label:"أو جرّب مثالاً:",
+  local_note:"🔒 لم يغادر ملفك هذه الصفحة. وفي التطبيق تعمل هذه الأدوات على جهازك أيضاً.",
+  files_n:"{n} ملفات",
+  feat_eyebrow:"أكثر من 200 أداة",feat_title:"كل ما تحتاجه لملفاتك، في تطبيق واحد",
+  feat_sub:"من تحرير PDF إلى ضغط الفيديو وتحسين الصور بالذكاء الاصطناعي، دون التنقل بين عشرة تطبيقات.",
+  priv_eyebrow:"الخصوصية أولاً",priv_title:"ملفاتك تبقى معك",
+  priv_text:"الضغط والتحويل وتحرير PDF والترجمة وتحسين الصور بالذكاء الاصطناعي تتم كلها على جهازك. لا خوادم لـ Dragitor تستقبل ملفاتك، ولا تتبّع، ولا تحليلات.",
+  fact_1:"بيانات تُجمع عنك",fact_2:"ملفات تُرفع لخوادمنا",fact_3:"ذكاء اصطناعي على الجهاز",fact_4:"الأصل محفوظ دائماً",
+  pro_eyebrow:"ابدأ مجاناً",pro_title:"Pro شراء واحد، لا اشتراك",pro_sub:"الأدوات الأساسية مجانية للجميع، ولكل مستخدم استخدام Pro مجاني كل يوم.",
+  free_name:"مجاني",free_tag:"للاستخدام اليومي",free_1:"ضغط الصور والفيديو والصوت وتحويلها",free_2:"محرر PDF ومحرر المستندات والكود",free_3:"الترجمة على الجهاز",free_4:"قائمة المشاركة والاختصارات والودجت",free_5:"استخدام Pro مجاني كل يوم",
+  pro_tag:"مرة واحدة، لك للأبد",pro_1:"تحسين الصور بالذكاء الاصطناعي: تكبير ×4 وإزالة الضوضاء والضبابية",pro_2:"الدفعات الكبيرة من الملفات",pro_3:"السلاسل المحفوظة لتكرار عملك بلمسة",pro_4:"كل الأدوات المميزة بالتاج",pro_5:"بلا اشتراك ولا تجديد",
+  faq_eyebrow:"أسئلة شائعة",faq_title:"قبل أن تبدأ",
+  q1:"هل تُرفع ملفاتي إلى أي خادم؟",a1:"لا. الضغط والتحويل وتحرير PDF والترجمة وتحسين الصور تتم على جهازك. الاستثناء الوحيد: التفريغ الصوتي قد يستخدم خوادم Apple بحسب اللغة والجهاز، وبعد إذنك.",
+  q2:"هل يعمل دون إنترنت؟",a2:"نعم، معظم الأدوات تعمل دون اتصال، ومنها تحسين الصور بالذكاء الاصطناعي لأن نماذجه مضمّنة في التطبيق. الترجمة قد تنزّل نموذج اللغة من Apple أول مرة فقط.",
+  q3:"هل Pro اشتراك؟",a3:"لا. Dragitor Pro شراء واحد يبقى لك، ويمكنك استعادته على أجهزتك من الإعدادات ▸ Dragitor Pro ▸ استعادة المشتريات.",
+  q4:"ما الأجهزة واللغات المدعومة؟",a4:"iPhone وiPad، والتطبيق متوفر بالعربية والإنجليزية والفرنسية والإسبانية والألمانية والتركية.",
+  q5:"هل التوقيع في محرر PDF توقيع رقمي رسمي؟",a5:"التوقيع المرسوم يُضاف إلى الصفحة كصورة، وليس توقيعاً رقمياً بشهادة.",
+  final_title:"اسحب، أفلت، وأنجز",final_sub:"كل أدوات ملفاتك في جيبك، بخصوصية تامة.",
+  f_support:"الدعم",f_privacy:"سياسة الخصوصية",
+  shots:[
+    ["الرئيسية","أفلت أي ملف، أو ابحث بين أكثر من 200 أداة مرتبة حسب النوع."],
+    ["محرر PDF","غيّر النص والصور الموجودة، واكتب وارسم ووقّع، مع تراجع وإعادة."],
+    ["تحسين بالذكاء الاصطناعي","كبّر الصور حتى ×4 وأزل الضوضاء والضبابية، على جهازك ودون إنترنت."],
+    ["محرر الكود","ألوان لكل لغة، وتبويبات لعدة ملفات، وتحقق فوري من JSON وXML وYAML."],
+    ["ملفاتي","أنشئ المستندات والكود وPDF وحرّرها، وتظهر في تطبيق الملفات أيضاً."]
+  ],
+  cats:{all:"الكل",pdf:"PDF",img:"الصور",media:"فيديو وصوت",doc:"مستندات وكود",tr:"الترجمة",flow:"سير العمل"},
+  feats:[
+    ["pdf","✏️","عدّل نص PDF الموجود","غيّر النص والصور في أي صفحة أو انقلها أو احذفها، كأنك في محرر حقيقي."],
+    ["pdf","✍️","وقّع واكتب وارسم","اكتب على الصفحة، وارسم بالقلم والأشكال، وأضف ملاحظات وأختاماً وتواقيع محفوظة."],
+    ["pdf","📑","نظّم الصفحات","ادمج وقسّم ورتّب ودوّر، واضغط PDF واحمه بكلمة مرور، واجعل الممسوح قابلاً للبحث بـ OCR."],
+    ["img","✨","تحسين بالذكاء الاصطناعي","كبّر الصور حتى ×4، وأزل الضوضاء والضبابية بنماذج تعمل على جهازك. (Pro)"],
+    ["img","🗜️","صغّر الصور","اضغط الصور إلى الحجم الذي تحتاجه للرسائل والبريد والرفع، وغيّر أبعادها."],
+    ["img","🔄","حوّل بين الصيغ","HEIC وJPG وPNG وPDF وGIF وغيرها، مع حذف بيانات الموقع قبل المشاركة."],
+    ["media","🎬","صغّر الفيديو والصوت","اضغط الفيديو والصوت، وقصّ الوسائط، وحوّل إلى MP4 وGIF وAAC."],
+    ["media","🌅","فيديو إلى صورة حية","حوّل الفيديو إلى صورة حية أو خلفية حية، والعكس."],
+    ["doc","📄","محرر مستندات كـ Word","يفتح DOCX وRTF ويحفظهما، بعناوين وقوائم وجداول وصور."],
+    ["doc","🧾","قوالب جاهزة","فواتير وسير ذاتية وتقارير وخطابات، تُصدَّر PDF مرتباً مع شعارك."],
+    ["doc","💻","محرر كود","JSON وXML وYAML وMarkdown وHTML و18 لغة برمجة، مع خريطة مصغّرة وتحقق فوري."],
+    ["doc","🔤","خطوطك الخاصة","أضف خطوط TTF وOTF واكتب بها في العلامة المائية وPDF والمستندات."],
+    ["tr","🌍","ترجم على جهازك","النصوص وملفات PDF والصور، بتعرّف تلقائي على اللغة ودون رفعها."],
+    ["flow","📤","من قائمة المشاركة","شغّل أي أداة مباشرة من الصور والملفات والتطبيقات الأخرى."],
+    ["flow","🗂️","ملفاتي وZIP","مستنداتك في مكان واحد يظهر في تطبيق الملفات، مع ZIP وإعادة تسمية دفعة واحدة."],
+    ["flow","⚡","اختصارات وودجت","اختصارات Siri، وودجت، وأزرار مركز التحكم، وخمسة ثيمات ألوان."]
+  ],
+  tools:{
+    img:[["🗜️","اضغط الصورة","إلى حجم تختاره للرسائل والبريد"],["✨","حسّنها بالذكاء الاصطناعي","تكبير ×4 وإزالة الضوضاء والضبابية",1],["🔄","حوّل الصيغة","HEIC وJPG وPNG وWebP وPDF"],["📍","احذف بيانات الموقع","قبل أن تشاركها"],["📐","غيّر الأبعاد","لمقاسات المنصات والطباعة"],["🌍","ترجم النص في الصورة","يقرأ النص على جهازك ثم يترجمه"]],
+    video:[["🗜️","اضغط الفيديو","ليناسب واتساب والبريد والرفع"],["🌅","حوّله إلى صورة حية","أو خلفية حية"],["✂️","قصّ المقطع","واحتفظ بالجزء الذي تريده"],["🔄","حوّل إلى MP4 أو GIF","بلمسة واحدة"]],
+    audio:[["🗜️","اضغط الصوت","بجودة تختارها"],["🔄","حوّل الصيغة","AAC وM4A وغيرها"],["✂️","قصّ المقطع","بدقة"],["📝","فرّغه نصاً","بعد إذنك، عبر Apple Speech"]],
+    pdf:[["✏️","عدّل النص والصور","الموجودة في الصفحة"],["✍️","وقّع واكتب وارسم","مع تواقيع محفوظة"],["📑","ادمج أو قسّم أو رتّب","الصفحات"],["🗜️","اضغط PDF","لحجم أصغر"],["🔐","احمه بكلمة مرور","قبل الإرسال"],["🔎","اجعله قابلاً للبحث","بالتعرف على النص OCR"],["🌍","ترجمه","على جهازك"]],
+    doc:[["📄","افتحه في محرر المستندات","DOCX وRTF بعناوين وجداول وصور"],["🧾","صدّره PDF","مرتباً وجاهزاً للمشاركة"],["🔤","اكتب بخطوطك","TTF وOTF"],["🌍","ترجم النص","على جهازك"]],
+    code:[["💻","افتحه في محرر الكود","بألوان اللغة وتبويبات"],["✅","تحقق من الأخطاء","فوراً لـ JSON وXML وYAML"],["🗂️","احفظه في «ملفاتي»","ويظهر في تطبيق الملفات"],["🌍","ترجم النص","على جهازك"]],
+    zip:[["📦","افتح الأرشيف","واستعرض محتواه"],["🗂️","احفظ ملفاته في «ملفاتي»","وحرّرها"]],
+    other:[["📦","أنشئ أرشيف ZIP","من ملف واحد أو عدة ملفات"],["🏷️","أعد التسمية","دفعة واحدة"],["📤","شاركه","من قائمة المشاركة"]],
+    many:[["📦","اجمعها في ZIP","بلمسة واحدة"],["🏷️","أعد تسميتها دفعة واحدة","بنمط تختاره"],["📚","ادمجها في PDF واحد","للصور وملفات PDF"]]
+  },
+  samples:[["📷","صورة.heic","image/heic"],["🎬","مقطع.mov","video/quicktime"],["📕","عقد.pdf","application/pdf"],["📄","تقرير.docx","application/vnd.openxmlformats-officedocument.wordprocessingml.document"],["🧩","config.json","application/json"]]
+},
+en:{
+  doc_title:"Dragitor — PDF Editor & Files",
+  nav_try:"Try it",nav_features:"Features",nav_privacy:"Privacy",nav_pro:"Pro",nav_faq:"FAQ",
+  hero_chip:"🔒 Everything on your device",
+  hero_title:'The <span class="g">all-in-one</span> file studio for iPhone and iPad',
+  hero_lead:"Edit any PDF, write Word documents, shrink videos and photos, enhance them with AI and translate files: fast, private, and nothing is uploaded.",
+  cta_small_soon:"Coming soon to the",cta_small_live:"Download on the",cta_try:"Try it with your own file ↓",
+  trust_1:"No account",trust_2:"No ads",trust_3:"No watermark",trust_4:"6 languages",
+  try_eyebrow:"Try it now",try_title:"Drop any file and see what Dragitor can do with it",
+  try_sub:"This is how the app works: drop a file and it suggests the right tools for its type. This page only reads the file's name and type, and uploads nothing.",
+  drop_title:"Drag and drop your files here",drop_sub:"Or tap to choose: a photo, video, audio, PDF, document, code…",
+  samples_label:"Or try an example:",
+  local_note:"🔒 Your file never left this page. In the app, these tools run on your device too.",
+  files_n:"{n} files",
+  feat_eyebrow:"200+ tools",feat_title:"Everything your files need, in one app",
+  feat_sub:"From PDF editing to video compression and AI photo enhancement, without juggling ten apps.",
+  priv_eyebrow:"Private by design",priv_title:"Your files stay with you",
+  priv_text:"Compression, conversion, PDF editing, translation and AI enhancement all run on your device. Dragitor has no servers receiving your files, no tracking and no analytics.",
+  fact_1:"data collected about you",fact_2:"files uploaded to our servers",fact_3:"on-device AI",fact_4:"original always kept",
+  pro_eyebrow:"Free to start",pro_title:"Pro is one purchase, not a subscription",pro_sub:"Core tools are free for everyone, and everyone gets one free Pro use every day.",
+  free_name:"Free",free_tag:"For everyday use",free_1:"Compress and convert photos, videos and audio",free_2:"PDF, document and code editors",free_3:"On-device translation",free_4:"Share Sheet, Shortcuts and widgets",free_5:"One free Pro use every day",
+  pro_tag:"Pay once, keep it forever",pro_1:"AI Enhance: 4× upscaling, noise and blur removal",pro_2:"Large batches of files",pro_3:"Saved chains to repeat your work in one tap",pro_4:"Every tool marked with a crown",pro_5:"No subscription, no renewals",
+  faq_eyebrow:"FAQ",faq_title:"Before you start",
+  q1:"Are my files uploaded to a server?",a1:"No. Compression, conversion, PDF editing, translation and photo enhancement run on your device. The only exception: speech transcription may use Apple servers depending on language and device, after you allow it.",
+  q2:"Does it work offline?",a2:"Yes, most tools work offline, including AI Enhance, because its models are bundled in the app. Translation may download a language model from Apple the first time only.",
+  q3:"Is Pro a subscription?",a3:"No. Dragitor Pro is a single purchase you keep, and you can restore it on your devices from Settings ▸ Dragitor Pro ▸ Restore Purchases.",
+  q4:"Which devices and languages are supported?",a4:"iPhone and iPad, in Arabic, English, French, Spanish, German and Turkish.",
+  q5:"Is the PDF editor's signature a certified digital signature?",a5:"A drawn signature is added to the page as an image; it is not a certificate-based digital signature.",
+  final_title:"Drag, drop, done",final_sub:"Every file tool in your pocket, completely private.",
+  f_support:"Support",f_privacy:"Privacy Policy",
+  shots:[
+    ["Home","Drop any file, or search 200+ tools sorted by type."],
+    ["PDF editor","Change existing text and images, type, draw and sign, with undo and redo."],
+    ["AI Enhance","Upscale photos up to 4× and remove noise and blur, on your device with no internet."],
+    ["Code editor","Syntax colors, tabs for several files, and live JSON, XML and YAML checks."],
+    ["My Files","Create and edit documents, code and PDFs, also shown in the Files app."]
+  ],
+  cats:{all:"All",pdf:"PDF",img:"Photos",media:"Video & audio",doc:"Docs & code",tr:"Translate",flow:"Workflow"},
+  feats:[
+    ["pdf","✏️","Edit existing PDF text","Change, move or delete the text and images on any page, like a real editor."],
+    ["pdf","✍️","Sign, type and draw","Type on the page, draw with pen and shapes, add notes, stamps and saved signatures."],
+    ["pdf","📑","Organize pages","Merge, split, reorder and rotate, compress and password-protect, and OCR scans."],
+    ["img","✨","AI Enhance","Upscale photos up to 4× and remove noise and blur with models that run on your device. (Pro)"],
+    ["img","🗜️","Shrink photos","Compress photos to the size you need for messages, email or uploads, and resize them."],
+    ["img","🔄","Convert formats","HEIC, JPG, PNG, PDF, GIF and more, and remove location data before sharing."],
+    ["media","🎬","Shrink video and audio","Compress video and audio, trim media, and convert to MP4, GIF and AAC."],
+    ["media","🌅","Video to Live Photo","Turn a video into a Live Photo or a live wallpaper, and back again."],
+    ["doc","📄","Word-style editor","Opens and saves DOCX and RTF, with headings, lists, tables and images."],
+    ["doc","🧾","Ready templates","Invoices, CVs, reports and letters, exported as clean PDFs with your logo."],
+    ["doc","💻","Code editor","JSON, XML, YAML, Markdown, HTML and 18 languages, with a minimap and live checks."],
+    ["doc","🔤","Your own fonts","Add TTF and OTF fonts and write with them in watermarks, PDFs and documents."],
+    ["tr","🌍","Translate on device","Text, PDFs and photos, with automatic language detection and no uploads."],
+    ["flow","📤","From the Share Sheet","Run any tool straight from Photos, Files and other apps."],
+    ["flow","🗂️","My Files and ZIP","Your documents in one place, visible in the Files app, plus ZIP and batch rename."],
+    ["flow","⚡","Shortcuts and widgets","Siri Shortcuts, widgets, Control Center buttons and five color themes."]
+  ],
+  tools:{
+    img:[["🗜️","Compress the photo","to a size you choose for messages and email"],["✨","Enhance it with AI","4× upscale, noise and blur removal",1],["🔄","Convert the format","HEIC, JPG, PNG, WebP and PDF"],["📍","Remove location data","before you share it"],["📐","Resize it","for platforms and print"],["🌍","Translate text in the photo","read on your device, then translated"]],
+    video:[["🗜️","Compress the video","to fit WhatsApp, email and uploads"],["🌅","Make it a Live Photo","or a live wallpaper"],["✂️","Trim the clip","and keep the part you want"],["🔄","Convert to MP4 or GIF","in one tap"]],
+    audio:[["🗜️","Compress the audio","at the quality you choose"],["🔄","Convert the format","AAC, M4A and more"],["✂️","Trim the clip","precisely"],["📝","Transcribe it","after you allow it, via Apple Speech"]],
+    pdf:[["✏️","Edit text and images","already on the page"],["✍️","Sign, type and draw","with saved signatures"],["📑","Merge, split or reorder","pages"],["🗜️","Compress the PDF","to a smaller size"],["🔐","Protect it with a password","before sending"],["🔎","Make it searchable","with OCR"],["🌍","Translate it","on your device"]],
+    doc:[["📄","Open it in the document editor","DOCX and RTF with headings, tables and images"],["🧾","Export as PDF","clean and ready to share"],["🔤","Write with your fonts","TTF and OTF"],["🌍","Translate the text","on your device"]],
+    code:[["💻","Open it in the code editor","with syntax colors and tabs"],["✅","Check for errors","live for JSON, XML and YAML"],["🗂️","Keep it in My Files","also shown in the Files app"],["🌍","Translate the text","on your device"]],
+    zip:[["📦","Open the archive","and browse what's inside"],["🗂️","Save its files to My Files","and edit them"]],
+    other:[["📦","Create a ZIP archive","from one or many files"],["🏷️","Rename","in batches"],["📤","Share it","from the Share Sheet"]],
+    many:[["📦","Zip them together","in one tap"],["🏷️","Rename them in one go","with a pattern you choose"],["📚","Merge into one PDF","for photos and PDFs"]]
+  },
+  samples:[["📷","photo.heic","image/heic"],["🎬","clip.mov","video/quicktime"],["📕","contract.pdf","application/pdf"],["📄","report.docx","application/vnd.openxmlformats-officedocument.wordprocessingml.document"],["🧩","config.json","application/json"]]
+}};
+
+const SHOTS = ["1-home","2-pdf-editor","3-ai-enhance","4-code-editor","5-my-files"];
+let lang = "ar", shot = 0, autoplay = true, timer = null, cat = "all", lastFiles = null;
+const $ = s => document.querySelector(s);
+
+function store(k, v){ try { v === undefined ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch(e){} }
+function load(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
+
+function applyLang(l){
+  lang = l; const t = T[l];
+  document.documentElement.lang = l;
+  document.documentElement.dir = l === "ar" ? "rtl" : "ltr";
+  document.title = t.doc_title;
+  document.querySelectorAll("[data-t]").forEach(el => { const k = el.dataset.t; if (k === "cta_small") el.textContent = APP_LIVE ? t.cta_small_live : t.cta_small_soon; else if (t[k] !== undefined) el.textContent = t[k]; });
+  document.querySelectorAll("[data-t-html]").forEach(el => { el.innerHTML = t[el.dataset.tHtml]; });
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === l));
+  buildPhone(); buildFeatures(); buildSamples();
+  if (lastFiles) showResult(lastFiles);
+  store("dragitor-lang", l);
+}
+
+/* Phone carousel */
+function buildPhone(){
+  const screen = $("#screen"), tabs = $("#tabs");
+  screen.innerHTML = ""; tabs.innerHTML = "";
+  SHOTS.forEach((s, i) => {
+    const img = new Image();
+    img.src = `img/${lang}/${s}.webp`; img.alt = T[lang].shots[i][0];
+    img.loading = i === 0 ? "eager" : "lazy"; img.decoding = "async";
+    if (i === shot) img.className = "on";
+    screen.appendChild(img);
+    const b = document.createElement("button");
+    b.type = "button"; b.setAttribute("role", "tab"); b.textContent = T[lang].shots[i][0];
+    b.setAttribute("aria-selected", i === shot);
+    b.onclick = () => { autoplay = false; showShot(i); };
+    tabs.appendChild(b);
+  });
+  $("#caption").textContent = T[lang].shots[shot][1];
+}
+function showShot(i){
+  shot = i;
+  document.querySelectorAll("#screen img").forEach((img, j) => img.classList.toggle("on", j === i));
+  document.querySelectorAll("#tabs button").forEach((b, j) => b.setAttribute("aria-selected", j === i));
+  $("#caption").textContent = T[lang].shots[i][1];
+}
+function startAuto(){
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  timer = setInterval(() => { if (autoplay && !document.hidden) showShot((shot + 1) % SHOTS.length); }, 3800);
+}
+
+/* Features */
+function buildFeatures(){
+  const t = T[lang], f = $("#filters"), g = $("#grid");
+  f.innerHTML = ""; g.innerHTML = "";
+  Object.entries(t.cats).forEach(([k, label]) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = label; b.setAttribute("aria-pressed", k === cat);
+    b.onclick = () => { cat = k; f.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b)); filter(); };
+    f.appendChild(b);
+  });
+  t.feats.forEach(([c, icon, title, text]) => {
+    const d = document.createElement("article");
+    d.className = `card c-${c}`; d.dataset.cat = c;
+    d.innerHTML = `<div class="ci" aria-hidden="true">${icon}</div><h3></h3><p></p>`;
+    d.querySelector("h3").textContent = title; d.querySelector("p").textContent = text;
+    g.appendChild(d);
+  });
+  filter();
+}
+function filter(){ document.querySelectorAll("#grid .card").forEach(c => c.classList.toggle("hide", cat !== "all" && c.dataset.cat !== cat)); }
+
+/* Drop demo */
+const EXT = {
+  img:["jpg","jpeg","png","heic","heif","webp","gif","tif","tiff","bmp","avif","dng"],
+  video:["mov","mp4","m4v","avi","mkv","webm","3gp"],
+  audio:["mp3","m4a","aac","wav","aif","aiff","caf","flac","ogg","opus"],
+  pdf:["pdf"],
+  doc:["doc","docx","rtf","odt","pages"],
+  code:["json","xml","yaml","yml","md","markdown","html","htm","css","js","ts","swift","py","java","kt","c","h","cpp","cs","go","rs","rb","php","sh","sql","txt","csv","log","plist","toml","ini"],
+  zip:["zip"]
+};
+function kindOf(name, type){
+  const ext = (name.split(".").pop() || "").toLowerCase();
+  for (const [k, list] of Object.entries(EXT)) if (list.includes(ext)) return k;
+  if (type.startsWith("image/")) return "img";
+  if (type.startsWith("video/")) return "video";
+  if (type.startsWith("audio/")) return "audio";
+  if (type.startsWith("text/")) return "code";
+  return "other";
+}
+function size(n){
+  if (n == null) return "";
+  const u = lang === "ar" ? ["بايت","ك.ب","م.ب","ج.ب"] : ["B","KB","MB","GB"];
+  let i = 0; while (n >= 1024 && i < 3) { n /= 1024; i++; }
+  return ` · ${n.toFixed(i ? 1 : 0)} ${u[i]}`;
+}
+function showResult(files){
+  lastFiles = files;
+  const t = T[lang], list = $("#toolList"), pill = $("#filePill");
+  const kinds = [...new Set(files.map(f => kindOf(f.name, f.type || "")))];
+  const icon = {img:"🖼️",video:"🎬",audio:"🎵",pdf:"📕",doc:"📄",code:"🧩",zip:"📦",other:"📁"};
+  pill.innerHTML = "";
+  const ic = document.createElement("b"); ic.textContent = files.length > 1 ? "🗂️" : icon[kinds[0]];
+  const nm = document.createElement("span");
+  nm.textContent = files.length > 1 ? t.files_n.replace("{n}", files.length) : files[0].name + size(files[0].size);
+  pill.append(ic, nm);
+  let tools = [];
+  kinds.forEach(k => tools.push(...t.tools[k]));
+  if (files.length > 1) tools = t.tools.many.concat(tools);
+  const seen = new Set(); tools = tools.filter(x => !seen.has(x[1]) && seen.add(x[1])).slice(0, 9);
+  list.innerHTML = "";
+  tools.forEach(([i, title, sub, pro], n) => {
+    const d = document.createElement("div");
+    d.className = "tool"; d.style.animationDelay = `${n * 60}ms`;
+    d.innerHTML = `<div class="ti" aria-hidden="true">${i}</div><div><b></b><small></small></div>`;
+    d.querySelector("b").textContent = title;
+    if (pro) { const p = document.createElement("span"); p.className = "pro"; p.textContent = "PRO"; d.querySelector("b").appendChild(p); }
+    d.querySelector("small").textContent = sub;
+    list.appendChild(d);
+  });
+  const r = $("#result"); r.classList.remove("show"); void r.offsetWidth; r.classList.add("show");
+}
+function buildSamples(){
+  const box = $("#samples");
+  box.querySelectorAll("button").forEach(b => b.remove());
+  T[lang].samples.forEach(([i, name, type]) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = `${i} ${name}`;
+    b.onclick = () => showResult([{name, type, size:null}]);
+    box.appendChild(b);
+  });
+}
+const drop = $("#drop");
+["dragenter","dragover"].forEach(e => drop.addEventListener(e, ev => { ev.preventDefault(); drop.classList.add("over"); }));
+["dragleave","drop"].forEach(e => drop.addEventListener(e, () => drop.classList.remove("over")));
+drop.addEventListener("drop", ev => { ev.preventDefault(); const f = [...ev.dataTransfer.files]; if (f.length) showResult(f.map(x => ({name:x.name, type:x.type, size:x.size}))); });
+$("#picker").addEventListener("change", ev => { const f = [...ev.target.files]; if (f.length) showResult(f.map(x => ({name:x.name, type:x.type, size:x.size}))); ev.target.value = ""; });
+// Dropping a file anywhere else shouldn't navigate away from the page.
+window.addEventListener("dragover", e => e.preventDefault());
+window.addEventListener("drop", e => e.preventDefault());
+
+/* Header + reveal */
+const header = $("#top");
+addEventListener("scroll", () => header.classList.toggle("scrolled", scrollY > 8), {passive:true});
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold:.12});
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+document.querySelectorAll(".lang button").forEach(b => b.onclick = () => applyLang(b.dataset.lang));
+const q = new URLSearchParams(location.search).get("lang");
+applyLang(q === "en" || q === "ar" ? q : (load("dragitor-lang") || ((navigator.language || "").startsWith("ar") ? "ar" : "en")));
+startAuto();
+</script>
+</body>
+</html>
